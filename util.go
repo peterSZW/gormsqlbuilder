@@ -82,9 +82,9 @@ func CreateSQL(data interface{}) (string, error) {
 
 		switch value.(type) {
 		case string:
-			valueStr = fmt.Sprintf(`"%v"`, value)
+			valueStr = fmt.Sprintf(`'%v'`, value)
 		case time.Time:
-			valueStr = fmt.Sprintf(`"%v"`, value)
+			valueStr = fmt.Sprintf(`'%v'`, value)
 		default:
 			valueStr = fmt.Sprintf("%v", value)
 		}

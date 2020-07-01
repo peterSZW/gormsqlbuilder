@@ -15,7 +15,11 @@ gensql:"notnull"
 ```
 2.Call CreateSQL to get the insert sql
 ```
+
+import "github.com/peterSZW/gormsqlbuilder"
+
 var person PersonDemo
-sql,err:=CreateSQL(person)
+sql,err:=gormsqlbuilder.CreateSQL(person)
 fmt.Println(sql)
+
 ```

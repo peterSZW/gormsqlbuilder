@@ -90,22 +90,24 @@ func CreateSQL(data interface{}) (string, error) {
 		}
 
 		column := FindColumn(k.Tag.Get("gorm"))
+		if column !="" {
 
-		flag := k.Tag.Get("gensql")
+			flag := k.Tag.Get("gensql")
 
-		//fmt.Println(column, flag)
+			//fmt.Println(column, flag)
 
-		if flag == "notnull" {
-			if valueStr == `''` || valueStr == "0" || valueStr == `'0001-01-01 00:00:00 +0000 UTC'` || valueStr == `'0001-01-01 00:00:00'` {
+			if flag == "notnull" {
+				if valueStr == `''` || valueStr == "0" || valueStr == `'0001-01-01 00:00:00 +0000 UTC'` || valueStr == `'0001-01-01 00:00:00'` {
+
+				} else {
+					values = values + valueStr + ","
+					columns = columns + `"` + column + `",`
+				}
 
 			} else {
 				values = values + valueStr + ","
 				columns = columns + `"` + column + `",`
 			}
-
-		} else {
-			values = values + valueStr + ","
-			columns = columns + `"` + column + `",`
 		}
 
 	}

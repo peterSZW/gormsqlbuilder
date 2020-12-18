@@ -81,6 +81,12 @@ func CreateSQL(data interface{}) (string, error) {
 		var valueStr string
 
 		switch value.(type) {
+		case *string:
+			if value.(*string) == nil {
+			    valueStr = `null`
+			} else {
+			    valueStr = fmt.Sprintf(`'%s'`, *value.(*string))
+			}
 		case string:
 			valueStr = fmt.Sprintf(`'%v'`, value)
 		case time.Time:
@@ -97,7 +103,7 @@ func CreateSQL(data interface{}) (string, error) {
 			//fmt.Println(column, flag)
 
 			if flag == "notnull" {
-				if valueStr == `''`|| valueStr == `<nil>` || valueStr == "0" || valueStr == `'0001-01-01 00:00:00 +0000 UTC'` || valueStr == `'0001-01-01 00:00:00'` {
+				if valueStr == `''` || valueStr == "0" || valueStr == `'0001-01-01 00:00:00 +0000 UTC'` || valueStr == `'0001-01-01 00:00:00'` {
 
 				} else {
 					values = values + valueStr + ","

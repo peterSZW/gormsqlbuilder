@@ -103,7 +103,7 @@ func CreateSQL(data interface{}) (string, error) {
 			//fmt.Println(column, flag)
 
 			if flag == "notnull" {
-				if valueStr == `''` || valueStr == "0" || valueStr == `'0001-01-01 00:00:00 +0000 UTC'` || valueStr == `'0001-01-01 00:00:00'` {
+				if valueStr == `''` || valueStr == `null` || valueStr == "0" || valueStr == `'0001-01-01 00:00:00 +0000 UTC'` || valueStr == `'0001-01-01 00:00:00'` {
 
 				} else {
 					values = values + valueStr + ","
